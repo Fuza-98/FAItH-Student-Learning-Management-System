@@ -4,17 +4,33 @@
  */
 package faith_slms;
 
+import java.util.*;
+
 /**
  *
- * @author Acer
+ * @author Fauzan
  */
 public class FAiTH_SLMS {
-
-    /**
-     * @param args the command line arguments
-     */
+    //Main class. Initialize objects here
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+      Scanner input = new Scanner(System.in);
+      int choice = 0;
+      CourseManager manager = new CourseManager(); //COurseManager object will contain Course array ~Fauzan
+      
+      do{ //Main loop for the menu. Will be completed later ~Fauzan
+          System.out.print("Enter choice (-1 to exit)");
+          choice = input.nextInt();
+          switch(choice){
+              case 1:
+                  manager.createCourse();
+                  break;
+              case 2:
+                  manager.displayCourses();
+                  break;
+          } 
+    }while(choice != -1);
+      
     }
     
 }

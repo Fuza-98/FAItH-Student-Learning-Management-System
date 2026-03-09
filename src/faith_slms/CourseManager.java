@@ -11,6 +11,7 @@ import java.util.*; //Importing scanner to accept input
  * @author Fauzan
  * This class is used to manage courses. Functions such as add, delete, search and update will go here
  * Semua function kita taruk dlm ni.. Kene update class diagram nnti last2 ~Fauzan
+ * Main functions completed, just needs polishing ~Fauzan (9/3/2026)
  */
 public class CourseManager {
     private Course[] courses = new Course[2];
@@ -48,7 +49,7 @@ public class CourseManager {
         System.out.println("Course added successfully.");
     }
 
-    //Edit function development
+    //Edit function development ~Aisar
     public void editCourse() {
         Scanner input = new Scanner(System.in);
 
@@ -110,6 +111,40 @@ public class CourseManager {
             System.out.println("Course not found.");
         }
     }
+    
+     public void deleteCourse() { //Delete function by Icap
+    Scanner input = new Scanner(System.in);
+
+    if (courseCount == 0) {
+        System.out.println("No courses available to delete.");
+        return;
+    }
+
+    System.out.print("Enter course code to delete: ");
+    String searchCode = input.nextLine();
+
+    boolean found = false;
+
+    for (int i = 0; i < courseCount; i++) {
+        if (courses[i].getCode().equalsIgnoreCase(searchCode)) {
+            found = true;
+
+            // Shift courses left to overwrite the deleted course
+            for (int j = i; j < courseCount - 1; j++) {
+                courses[j] = courses[j + 1];
+            }
+            courses[courseCount - 1] = null; // Clear last element
+            courseCount--;
+
+            System.out.println("Course deleted successfully.");
+            break;
+        }
+    }
+
+    if (!found) {
+        System.out.println("Course not found.");
+    }
+}
 
     //Seach Function - Haris
     public void searchCourse() {

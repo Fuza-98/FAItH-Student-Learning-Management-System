@@ -146,32 +146,31 @@ public class CourseManager {
     }
 }
 
-    //Seach Function - Haris
-    public void searchCourse() {
+    public void deleteCourse() {
     Scanner input = new Scanner(System.in);
 
     if (courseCount == 0) {
-        System.out.println("No courses available.");
+        System.out.println("No courses available to delete.");
         return;
     }
 
-    System.out.print("Enter course code to search: ");
+    System.out.print("Enter course code to delete: ");
     String searchCode = input.nextLine();
 
     boolean found = false;
 
     for (int i = 0; i < courseCount; i++) {
-
         if (courses[i].getCode().equalsIgnoreCase(searchCode)) {
-
-            System.out.println("\nCourse Found!");
-            System.out.println("Name: " + courses[i].getName());
-            System.out.println("Code: " + courses[i].getCode());
-            System.out.println("Credit Hours: " + courses[i].getCredits());
-            System.out.println("Summary: " + courses[i].getSummary());
-            System.out.println("Teams Link: " + courses[i].getLink());
-
             found = true;
+
+            // Shift courses left to overwrite the deleted course
+            for (int j = i; j < courseCount - 1; j++) {
+                courses[j] = courses[j + 1];
+            }
+            courses[courseCount - 1] = null; // Clear last element
+            courseCount--;
+
+            System.out.println("Course deleted successfully.");
             break;
         }
     }
@@ -180,7 +179,7 @@ public class CourseManager {
         System.out.println("Course not found.");
     }
 }
-
+    
     public void displayCourses() { //Basic displaying function. Akan tukar ke format table nnti ~Fauzan
         if(courseCount == 0){
             System.out.println("No courses created! Exiting function...");

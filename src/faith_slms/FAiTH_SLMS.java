@@ -28,6 +28,9 @@ public class FAiTH_SLMS {
               case 2:
                   manager.displayCourses();
                   break;
+              case 3:
+                  manager.searchCourse();
+        break;
           } 
     }while(choice != -1);
       

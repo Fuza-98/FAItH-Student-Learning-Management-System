@@ -112,31 +112,31 @@ public class CourseManager {
         }
     }
     
-     public void deleteCourse() { //Delete function by Icap
+    public void searchCourse() { //Search function by Haris
     Scanner input = new Scanner(System.in);
 
     if (courseCount == 0) {
-        System.out.println("No courses available to delete.");
+        System.out.println("No courses available.");
         return;
     }
 
-    System.out.print("Enter course code to delete: ");
+    System.out.print("Enter course code to search: ");
     String searchCode = input.nextLine();
 
     boolean found = false;
 
     for (int i = 0; i < courseCount; i++) {
+
         if (courses[i].getCode().equalsIgnoreCase(searchCode)) {
+
+            System.out.println("\nCourse Found!");
+            System.out.println("Name: " + courses[i].getName());
+            System.out.println("Code: " + courses[i].getCode());
+            System.out.println("Credit Hours: " + courses[i].getCredits());
+            System.out.println("Summary: " + courses[i].getSummary());
+            System.out.println("Teams Link: " + courses[i].getLink());
+
             found = true;
-
-            // Shift courses left to overwrite the deleted course
-            for (int j = i; j < courseCount - 1; j++) {
-                courses[j] = courses[j + 1];
-            }
-            courses[courseCount - 1] = null; // Clear last element
-            courseCount--;
-
-            System.out.println("Course deleted successfully.");
             break;
         }
     }

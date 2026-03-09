@@ -111,6 +111,40 @@ public class CourseManager {
         }
     }
 
+    public void deleteCourse() {
+    Scanner input = new Scanner(System.in);
+
+    if (courseCount == 0) {
+        System.out.println("No courses available to delete.");
+        return;
+    }
+
+    System.out.print("Enter course code to delete: ");
+    String searchCode = input.nextLine();
+
+    boolean found = false;
+
+    for (int i = 0; i < courseCount; i++) {
+        if (courses[i].getCode().equalsIgnoreCase(searchCode)) {
+            found = true;
+
+            // Shift courses left to overwrite the deleted course
+            for (int j = i; j < courseCount - 1; j++) {
+                courses[j] = courses[j + 1];
+            }
+            courses[courseCount - 1] = null; // Clear last element
+            courseCount--;
+
+            System.out.println("Course deleted successfully.");
+            break;
+        }
+    }
+
+    if (!found) {
+        System.out.println("Course not found.");
+    }
+}
+    
     public void displayCourses() { //Basic displaying function. Akan tukar ke format table nnti ~Fauzan
         if(courseCount == 0){
             System.out.println("No courses created! Exiting function...");

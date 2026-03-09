@@ -18,8 +18,13 @@ public class FAiTH_SLMS {
       int choice = 0;
       CourseManager manager = new CourseManager(); //COurseManager object will contain Course array ~Fauzan
       
-      do{ //Main loop for the menu. Will be completed later ~Fauzan
-          System.out.print("Enter choice (-1 to exit)");
+      do{ //Main loop for the menu. Will be completed later ~Fauzan == already completed by haris
+          System.out.println("\n===== COURSE MANAGEMENT =====");
+          System.out.println("1. Create Course");
+          System.out.println("2. Display Courses");
+          System.out.println("3. Search Course");
+          System.out.println("-1. Exit");
+          System.out.print("Enter choice: ");
           choice = input.nextInt();
           switch(choice){
               case 1:

@@ -9,6 +9,7 @@ import java.util.*;
 /**
  *
  * @author Fauzan
+ * Update 1/4/2026: Added Student Management for the system. Not an April Fools joke
  */
 public class FAiTH_SLMS {
     //Main class. Initialize objects here
@@ -17,7 +18,8 @@ public class FAiTH_SLMS {
       Scanner input = new Scanner(System.in);
       int choice = 0;
       CourseManager manager = new CourseManager(); //CourseManager object will contain Course array ~Fauzan
-      
+      StudentManager studManager = new StudentManager(); //StudentManager object to manage student details ~Fauzan
+      System.out.println("\n===== FAITH SLMS =====");
       do{ // (9/3/2026) Extended Haris version of menu ~Fauzan
           System.out.println("\n===== COURSE MANAGEMENT =====");
           System.out.println("1. Create Course");
@@ -25,6 +27,12 @@ public class FAiTH_SLMS {
           System.out.println("3. Search Course");
           System.out.println("4. Edit Course");
           System.out.println("5. Delete Course");
+          System.out.println("\n===== STUDENT MANAGEMENT =====");
+          System.out.println("6. Add Student");
+          System.out.println("7. Display Students");
+          System.out.println("8. Search Student");
+          System.out.println("9. Edit Student");
+          System.out.println("0. Remove Student");
           System.out.println("-1. Exit");
           System.out.print("Enter choice: ");
           choice = input.nextInt();
@@ -44,6 +52,21 @@ public class FAiTH_SLMS {
                   break;
               case 5:
                   manager.deleteCourse();
+                  break;
+              case 6:
+                  studManager.addStudent();
+                  break;
+              case 7:
+                  studManager.displayStudents();
+                  break;
+              case 8:
+                  studManager.searchStudent();
+                  break;
+              case 9:
+                  studManager.editStudent();
+                  break;
+              case 0:
+                  studManager.deleteStudent();
                   break;
           } 
     }while(choice != -1);

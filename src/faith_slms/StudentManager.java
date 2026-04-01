@@ -2,71 +2,73 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package faith_slms;
+package faith_slms; // Declare package name
 
-import java.util.*;
+import java.util.*; // Import utilities (Scanner used)
 
 /**
  *
  * @author Fauzan
  * This class has the same function as StudentManager to actually manage and manipulate the info from the Student class
  */
-public class StudentManager {
-    private Student[] students = new Student[2];
-    private int studentCount = 0;
+public class StudentManager { // Define StudentManager class
+    
+    private Student[] students = new Student[2]; // Array to store Student objects (size 2)
+    private int studentCount = 0; // Counter to track number of students
 
     public void addStudent() { 
         
-        //Create function ~Fauzan
-        Scanner input = new Scanner(System.in);
-        if (studentCount >= students.length) { // Prevent out-of-bound error
+        // Function to create and add new student
+        Scanner input = new Scanner(System.in); // Create Scanner object
+        
+        if (studentCount >= students.length) { // Check if array is full
             System.out.println("Cannot add more students. Array is full.");
-            return;
+            return; // Exit function
         }
         
-        System.out.print("Enter student first name: ");
-        String first_name = input.next();
+        System.out.print("Enter student first name: "); // Prompt
+        String first_name = input.next(); // Read first name
         
-        input.nextLine();
+        input.nextLine(); // Clear buffer
         
-        System.out.print("Enter student last name: ");
-        String last_name = input.next();
+        System.out.print("Enter student last name: "); // Prompt
+        String last_name = input.next(); // Read last name
         
-        input.nextLine();
+        input.nextLine(); // Clear buffer
         
-        System.out.print("Enter id: ");
-        String id = input.nextLine();
+        System.out.print("Enter id: "); // Prompt
+        String id = input.nextLine(); // Read ID
         
-        System.out.print("Enter email: ");
-        String email = input.nextLine();
+        System.out.print("Enter email: "); // Prompt
+        String email = input.nextLine(); // Read email
         
-        System.out.print("Enter phone number: ");
-        String phone_number = input.nextLine();
+        System.out.print("Enter phone number: "); // Prompt
+        String phone_number = input.nextLine(); // Read phone number
         
-        Student newStudent = new Student(first_name, last_name, id, email, phone_number);
-        students[studentCount] = newStudent;
-        studentCount++;
+        Student newStudent = new Student(first_name, last_name, id, email, phone_number); // Create Student object
+        students[studentCount] = newStudent; // Store in array
+        studentCount++; // Increase count
 
-        System.out.println("Student added successfully.");
+        System.out.println("Student added successfully."); // Confirmation
     }
 
-    //Edit function development ~Aisar
+    // Function to edit student
     public void editStudent() {
-        Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(System.in); // Create Scanner object
 
-        if (studentCount == 0) {
+        if (studentCount == 0) { // Check if empty
             System.out.println("No students available to edit.");
-            return;
+            return; // Exit
         }
 
-        System.out.print("Enter student id to edit: ");
-        String searchID = input.nextLine();
+        System.out.print("Enter student id to edit: "); // Prompt
+        String searchID = input.nextLine(); // Read input
     
-        boolean found = false;
+        boolean found = false; // Flag
     
-        for (int i = 0; i < studentCount; i++) {
+        for (int i = 0; i < studentCount; i++) { // Loop
     
-            if (students[i].getID().equalsIgnoreCase(searchID)) {
+            if (students[i].getID().equalsIgnoreCase(searchID)) { // Compare ID
                 found = true;
     
                 System.out.println("\nStudent found!");
@@ -76,29 +78,27 @@ public class StudentManager {
                 System.out.println("Email: " + students[i].getEmail());
                 System.out.println("Phone Number: " + students[i].getPhone());
   
-    
-                // Editing attributes (except student id)
+                // Update attributes (except ID)
                 System.out.print("\nEnter new student first name: ");
-                String newFirstName = input.next();
-                students[i].setFirstName(newFirstName);
+                String newFirstName = input.next(); // Read new first name
+                students[i].setFirstName(newFirstName); // Update
                 
-                input.nextLine();
+                input.nextLine(); // Clear buffer
                 
                 System.out.print("\nEnter new student last name: ");
-                String newLastName = input.next();
-                students[i].setLastName(newLastName);
+                String newLastName = input.next(); // Read new last name
+                students[i].setLastName(newLastName); // Update
                 
-                input.nextLine();
+                input.nextLine(); // Clear buffer
     
                 System.out.print("Enter new email: ");
-                String newEmail = input.nextLine(); //No need to clear buffer since it's already a string
-                students[i].setEmail(newEmail);
+                String newEmail = input.nextLine(); // Read new email
+                students[i].setEmail(newEmail); // Update
     
                 System.out.print("Enter new phone number: ");
-                String newPhone = input.nextLine();
-                students[i].setPhone(newPhone);
+                String newPhone = input.nextLine(); // Read new phone
+                students[i].setPhone(newPhone); // Update
    
-    
                 // Display updated student
                 System.out.println("\nStudent updated successfully!");
                 System.out.println("Updated Student Details:");
@@ -107,95 +107,98 @@ public class StudentManager {
                 System.out.println("Email: " + students[i].getEmail());
                 System.out.println("Phone: " + students[i].getPhone());
 
-    
-                break;
+                break; // Exit loop
             }
         }
     
-        if (!found) {
+        if (!found) { // If not found
             System.out.println("Student not found.");
         }
     }
     
-    public void searchStudent() { //Search function by Haris
-    Scanner input = new Scanner(System.in);
+    public void searchStudent() { // Function to search student
+        Scanner input = new Scanner(System.in); // Create Scanner
 
-    if (studentCount == 0) {
-        System.out.println("No students available.");
-        return;
-    }
-
-    System.out.print("Enter student id to search: ");
-    String searchID = input.nextLine();
-
-    boolean found = false;
-
-    for (int i = 0; i < studentCount; i++) {
-
-        if (students[i].getID().equalsIgnoreCase(searchID)) {
-
-            System.out.println("\nStudent Found!");
-            System.out.println("Name: " + students[i].getFirstName());
-            System.out.println("ID: " + students[i].getID());
-            System.out.println("Email: " + students[i].getEmail());
-            System.out.println("Phone: " + students[i].getPhone());
-
-            found = true;
-            break;
+        if (studentCount == 0) { // Check if empty
+            System.out.println("No students available.");
+            return;
         }
-    }
 
-    if (!found) {
-        System.out.println("Student not found.");
-    }
-}
+        System.out.print("Enter student id to search: "); // Prompt
+        String searchID = input.nextLine(); // Read input
 
-    public void deleteStudent() { //By Icap
-    Scanner input = new Scanner(System.in);
+        boolean found = false; // Flag
 
-    if (studentCount == 0) {
-        System.out.println("No students available to delete.");
-        return;
-    }
+        for (int i = 0; i < studentCount; i++) { // Loop
 
-    System.out.print("Enter student id to delete: ");
-    String searchID = input.nextLine();
+            if (students[i].getID().equalsIgnoreCase(searchID)) { // Compare
 
-    boolean found = false;
+                System.out.println("\nStudent Found!");
+                System.out.println("Name: " + students[i].getFirstName());
+                System.out.println("ID: " + students[i].getID());
+                System.out.println("Email: " + students[i].getEmail());
+                System.out.println("Phone: " + students[i].getPhone());
 
-    for (int i = 0; i < studentCount; i++) {
-        if (students[i].getID().equalsIgnoreCase(searchID)) {
-            found = true;
-
-            // Shift students left to overwrite the deleted student
-            for (int j = i; j < studentCount - 1; j++) {
-                students[j] = students[j + 1];
+                found = true;
+                break;
             }
-            students[studentCount - 1] = null; // Clear last element
-            studentCount--;
+        }
 
-            System.out.println("Student removed successfully.");
-            break;
+        if (!found) { // If not found
+            System.out.println("Student not found.");
         }
     }
 
-    if (!found) {
-        System.out.println("Student not found.");
+    public void deleteStudent() { // Function to delete student
+        Scanner input = new Scanner(System.in); // Create Scanner
+
+        if (studentCount == 0) { // Check if empty
+            System.out.println("No students available to delete.");
+            return;
+        }
+
+        System.out.print("Enter student id to delete: "); // Prompt
+        String searchID = input.nextLine(); // Read input
+
+        boolean found = false; // Flag
+
+        for (int i = 0; i < studentCount; i++) { // Loop
+            if (students[i].getID().equalsIgnoreCase(searchID)) { // Compare
+                found = true;
+
+                // Shift elements left
+                for (int j = i; j < studentCount - 1; j++) {
+                    students[j] = students[j + 1]; // Move element
+                }
+
+                students[studentCount - 1] = null; // Clear last slot
+                studentCount--; // Reduce count
+
+                System.out.println("Student removed successfully.");
+                break;
+            }
+        }
+
+        if (!found) { // If not found
+            System.out.println("Student not found.");
+        }
     }
-}
     
-    public void displayStudents() { //Basic displaying function. Akan tukar ke format table nnti ~Fauzan
-        if(studentCount == 0){
+    public void displayStudents() { // Function to display all students
+        
+        if(studentCount == 0){ // Check if empty
             System.out.println("No students created! Exiting function...");
             return;
         }
-        for (int i = 0; i < studentCount; i++) {
-            System.out.println("Student " + (i + 1));
+        
+        for (int i = 0; i < studentCount; i++) { // Loop
+            
+            System.out.println("Student " + (i + 1)); // Display index
             System.out.println("Name: " + students[i].getFirstName() + " " + students[i].getLastName());
             System.out.println("ID: " + students[i].getID());
             System.out.println("Email: " + students[i].getEmail());
             System.out.println("Phone: " + students[i].getPhone());
-            System.out.println();
+            System.out.println(); // Spacing
         }
     }
 }

@@ -15,7 +15,27 @@ public class StudentManager { // Define StudentManager class
     
     private Student[] students = new Student[2]; // Array to store Student objects (size 2)
     private int studentCount = 0; // Counter to track number of students
+    
+    //These 3 methods before the add function are helper methods for the RelationshiManager
+    public int getStudentCount(){
+        return studentCount;
+    }
 
+    public Student getStudentByIndex(int index){
+        if(index >= 0 && index < studentCount){
+            return students[index];
+        }
+        return null;
+    }
+    
+    public int findStudentIndexById(String id){
+        for(int i = 0; i < studentCount; i++){
+            if(students[i].getID().equalsIgnoreCase(id)){
+                return i;
+            }
+        }
+        return -1;
+    }
     public void addStudent() { 
         
         // Function to create and add new student

@@ -19,8 +19,9 @@ public class FAiTH_SLMS { // Main class
         Scanner input = new Scanner(System.in); // Create Scanner for user input
         int choice = 0; // Variable to store user menu choice
         
-        CourseManager manager = new CourseManager(); // Object to manage courses
+        CourseManager courseManager = new CourseManager(); // Object to manage courses
         StudentManager studManager = new StudentManager(); // Object to manage students
+        RelationshipManager relManager = new RelationshipManager(studManager, courseManager); //Object to manage Course - Student relationship
         
         System.out.println("\n===== FAITH SLMS ====="); // Display system title
         
@@ -39,7 +40,12 @@ public class FAiTH_SLMS { // Main class
             System.out.println("8. Search Student"); // Option 8
             System.out.println("9. Edit Student"); // Option 9
             System.out.println("0. Remove Student"); // Option 0
-            System.out.println("-1. Exit"); // Exit option
+            
+            System.out.println("\n===== RELATIONSHIP MANAGEMENT ====="); //Relationship Management
+            System.out.println("10. Assign Student to Course"); //Option 10
+            System.out.println("11. List Courses of a Student"); //Option 11
+            System.out.println("12. List Students in a Course"); //Option 12
+            System.out.println("-1. Exit"); // Exit option 
             
             System.out.print("Enter choice: "); // Prompt user
             choice = input.nextInt(); // Read user input
@@ -49,23 +55,23 @@ public class FAiTH_SLMS { // Main class
             switch(choice){ // Switch based on user choice
                 
                 case 1:
-                    manager.createCourse(); // Call create course function
+                    courseManager.createCourse(); // Call create course function
                     break;
                     
                 case 2:
-                    manager.displayCourses(); // Call display courses
+                    courseManager.displayCourses(); // Call display courses
                     break;
                     
                 case 3:
-                    manager.searchCourse(); // Call search course
+                    courseManager.searchCourse(); // Call search course
                     break;
                     
                 case 4:
-                    manager.editCourse(); // Call edit course
+                    courseManager.editCourse(); // Call edit course
                     break;
                     
                 case 5:
-                    manager.deleteCourse(); // Call delete course
+                    courseManager.deleteCourse(); // Call delete course
                     break;
                     
                 case 6:
@@ -86,6 +92,32 @@ public class FAiTH_SLMS { // Main class
                     
                 case 0:
                     studManager.deleteStudent(); // Call delete student
+                    break;
+                case 10:
+                    input.nextLine();
+                    System.out.print("Enter student ID: ");
+                    String studentId = input.nextLine();
+
+                    System.out.print("Enter course code: ");
+                    String courseCode = input.nextLine();
+
+                    relManager.assignStudentToCourse(studentId, courseCode);
+                    break;
+
+                case 11:
+                    input.nextLine();
+                    System.out.print("Enter student ID: ");
+                    String studentIdForCourses = input.nextLine();
+
+                    relManager.listCoursesOfStudent(studentIdForCourses);
+                    break;
+
+                case 12:
+                    input.nextLine();
+                    System.out.print("Enter course code: ");
+                    String courseCodeForStudents = input.nextLine();
+
+                    relManager.listStudentsInCourse(courseCodeForStudents);
                     break;
             } 
             

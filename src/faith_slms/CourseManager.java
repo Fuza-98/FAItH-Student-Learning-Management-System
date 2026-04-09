@@ -17,6 +17,26 @@ public class CourseManager { // Define CourseManager class
     
     private Course[] courses = new Course[2]; // Array to store Course objects (size 2)
     private int courseCount = 0; // Counter to track number of courses stored
+    
+    public int getCourseCount() {
+        return courseCount;
+    }
+
+    public Course getCourseByIndex(int index) {
+        if (index >= 0 && index < courseCount) {
+            return courses[index];
+        }
+        return null;
+    }
+
+    public int findCourseIndexByCode(String courseCode) {
+        for (int i = 0; i < courseCount; i++) {
+            if (courses[i].getCode().equalsIgnoreCase(courseCode)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     public void createCourse() { 
         // Function to create and add a new course

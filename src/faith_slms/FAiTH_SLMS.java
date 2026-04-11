@@ -22,6 +22,7 @@ public class FAiTH_SLMS { // Main class
         CourseManager courseManager = new CourseManager(); // Object to manage courses
         StudentManager studManager = new StudentManager(); // Object to manage students
         RelationshipManager relManager = new RelationshipManager(studManager, courseManager); //Object to manage Course - Student relationship
+        SuggestionService suggestionService = new SuggestionService();
         
         System.out.println("\n===== FAITH SLMS ====="); // Display system title
         
@@ -118,6 +119,18 @@ public class FAiTH_SLMS { // Main class
                     String courseCodeForStudents = input.nextLine();
 
                     relManager.listStudentsInCourse(courseCodeForStudents);
+                    break;
+                case 13:
+                    input.nextLine();
+                    System.out.print("Enter prefix: ");
+                    String prefix = input.nextLine();
+                
+                    String[] suggestions = suggestionService.suggestFromCache(prefix);
+                
+                    System.out.println("Suggestions:");
+                    for (String s : suggestions) {
+                        System.out.println(s);
+                    }
                     break;
             } 
             

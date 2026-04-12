@@ -11,15 +11,21 @@ package faith_slms;
 public class RelationshipManager {
     private StudentManager studManager;
     private CourseManager courseManager;
+    private CacheService cache;
     private boolean[][] enrollment;
     
     public RelationshipManager(StudentManager studManager, CourseManager courseManager){
         this.studManager = studManager;
         this.courseManager = courseManager;
+        this.cache = cache;
         this.enrollment = new boolean[100][100];
     }
     
     public boolean assignStudentToCourse(String studentId, String courseCode) {
+        
+        cache.cacheInputValue(studentId);
+        cache.cacheInputValue(courseCode);
+        
         int studentIndex = studManager.findStudentIndexById(studentId);
         int courseIndex = courseManager.findCourseIndexByCode(courseCode);
         
@@ -50,6 +56,7 @@ public class RelationshipManager {
     }
     
     public void listCoursesOfStudent(String studentId){
+        cache.cacheSearchTerm(studentId);
         int studentIndex = studManager.findStudentIndexById(studentId);
         if (studentIndex == -1) {
             System.out.println("Student not found.");
@@ -75,6 +82,7 @@ public class RelationshipManager {
     }
     
     public void listStudentsInCourse(String courseCode) {
+        cache.cacheSearchTerm(courseCode);
         int courseIndex = courseManager.findCourseIndexByCode(courseCode);
 
         if (courseIndex == -1) {

@@ -23,7 +23,7 @@ public class FAiTH_SLMS { // Main class
         SuggestionService suggestionService = new SuggestionService();
         CourseManager courseManager = new CourseManager(cacheService);//Object to manage course 
         StudentManager studManager = new StudentManager(cacheService);// Object to manage students
-        RelationshipManager relManager = new RelationshipManager(studManager, courseManager); //Object to manage Course - Student relationship
+        RelationshipManager relManager = new RelationshipManager(studManager, courseManager, cacheService); //Object to manage Course - Student relationship
         
         System.out.println("\n===== FAITH SLMS ====="); // Display system title
         

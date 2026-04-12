@@ -19,10 +19,11 @@ public class FAiTH_SLMS { // Main class
         Scanner input = new Scanner(System.in); // Create Scanner for user input
         int choice = 0; // Variable to store user menu choice
         
-        CourseManager courseManager = new CourseManager(); // Object to manage courses
-        StudentManager studManager = new StudentManager(); // Object to manage students
-        RelationshipManager relManager = new RelationshipManager(studManager, courseManager); //Object to manage Course - Student relationship
+        CacheService cacheService = new CacheService();
         SuggestionService suggestionService = new SuggestionService();
+        CourseManager courseManager = new CourseManager(cacheService);//Object to manage course 
+        StudentManager studManager = new StudentManager(cacheService);// Object to manage students
+        RelationshipManager relManager = new RelationshipManager(studManager, courseManager); //Object to manage Course - Student relationship
         
         System.out.println("\n===== FAITH SLMS ====="); // Display system title
         
@@ -122,14 +123,18 @@ public class FAiTH_SLMS { // Main class
                     break;
                 case 13:
                     input.nextLine();
-                    System.out.print("Enter prefix: ");
+                    System.out.print("Enter prefix to search cache: ");
                     String prefix = input.nextLine();
                 
-                    String[] suggestions = suggestionService.suggestFromCache(prefix);
+                    String[] suggestions = suggestionService.suggestFromCache(prefix, cacheService);
                 
-                    System.out.println("Suggestions:");
-                    for (String s : suggestions) {
-                        System.out.println(s);
+                    System.out.println("--- Suggestions from Cache ---");
+                    if (suggestions.length == 0) {
+                        System.out.println("No matches found.");
+                    } else {
+                        for (String s : suggestions) {
+                            System.out.println("-> " + s);
+                        }
                     }
                     break;
             } 

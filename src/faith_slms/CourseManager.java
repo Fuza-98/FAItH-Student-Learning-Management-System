@@ -15,8 +15,13 @@ import java.util.*; // Import all utilities (Scanner used for input)
  */
 public class CourseManager { // Define CourseManager class
     
-    private Course[] courses = new Course[2]; // Array to store Course objects (size 2)
+    private CacheService cache;
+    private Course[] courses = new Course[10]; // Array to store Course objects (size 10)
     private int courseCount = 0; // Counter to track number of courses stored
+
+    public CourseManager(CacheService cache) {
+        this.cache = cache;
+    }
     
     public int getCourseCount() {
         return courseCount;
@@ -49,20 +54,25 @@ public class CourseManager { // Define CourseManager class
         
         System.out.print("Enter course name: "); // Prompt user
         String name = input.nextLine(); // Read course name
+        cache.cacheInputValue(name);
         
         System.out.print("Enter course code: "); // Prompt user
         String code = input.nextLine(); // Read course code
+        cache.cacheInputValue(code);
         
         System.out.print("Enter credit hours: "); // Prompt user
         int creditHours = input.nextInt(); // Read credit hours
+        cache.cacheInputValue(creditHours);
         
         input.nextLine(); // Clear input buffer
         
         System.out.print("Enter course summary: "); // Prompt user
         String summary = input.nextLine(); // Read summary
+        cache.cacheInputValue(summary);
         
         System.out.print("Enter Microsoft Teams link: "); // Prompt user
         String teamsLink = input.nextLine(); // Read Teams link
+        cache.cacheInputValue(teamsLink);
         
         Course newCourse = new Course(name, code, creditHours, summary, teamsLink); // Create new Course object
         courses[courseCount] = newCourse; // Store in array
@@ -82,6 +92,7 @@ public class CourseManager { // Define CourseManager class
 
         System.out.print("Enter course code to edit: "); // Prompt user
         String searchCode = input.nextLine(); // Read course code
+        cache.cacheSearchTerm(searchCode);
     
         boolean found = false; // Flag to track if course is found
     
@@ -101,19 +112,23 @@ public class CourseManager { // Define CourseManager class
                 // Update course attributes (except code)
                 System.out.print("\nEnter new course name: ");
                 String newName = input.nextLine(); // Read new name
+                cache.cacheInputValue(newName);
                 courses[i].setName(newName); // Update name
     
                 System.out.print("Enter new credit hours: ");
                 int newCredits = input.nextInt(); // Read new credits
                 input.nextLine(); // Clear buffer
+                cache.cacheInputValue(newCredits);
                 courses[i].setCredits(newCredits); // Update credits
     
                 System.out.print("Enter new course summary: ");
                 String newSummary = input.nextLine(); // Read new summary
+                cache.cacheInputValue(newSummary);
                 courses[i].setSummary(newSummary); // Update summary
     
                 System.out.print("Enter new Microsoft Teams link: ");
                 String newLink = input.nextLine(); // Read new link
+                cache.cacheInputValue(newLink);
                 courses[i].setLink(newLink); // Update link
     
                 // Display updated course
@@ -144,6 +159,8 @@ public class CourseManager { // Define CourseManager class
 
         System.out.print("Enter course code to search: "); // Prompt
         String searchCode = input.nextLine(); // Read input
+
+        cache.cacheSearchTerm(searchCode);
 
         boolean found = false; // Flag
 

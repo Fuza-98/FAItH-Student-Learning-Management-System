@@ -12,18 +12,15 @@ import java.util.*;
  * Used for Lab 7 & Lab 8 (API + caching requirement)
  */
 public class SuggestionService {
-
-    // Cache storage
-    private ArrayList<String> studentCache;
-    private ArrayList<String> courseCache;
+    
+    private CacheService cacheService;
 
     /**
      * Constructor
      * Initialize empty cache lists
      */
-    public SuggestionService() {
-        studentCache = new ArrayList<>();
-        courseCache = new ArrayList<>();
+    public SuggestionService(CacheService cacheService) {
+        this.cacheService = cacheService;
     }
 
     /**
@@ -51,47 +48,51 @@ public class SuggestionService {
      * Based on prefix input
      */
     public String[] suggestFromCache(String prefix) {
-        ArrayList<String> results = new ArrayList<>();
+    ArrayList<String> results = new ArrayList<>();
 
-        // Search student IDs
-        for (String id : studentCache) {
-            if (id.startsWith(prefix)) {
-                results.add(id);
-            }
+    // Fetch data from the actual CacheService
+    String[] searchHistory = cacheService.getCachedSearches();
+    String[] inputHistory = cacheService.getCachedInputs();
+
+    // Search through searchHistory
+    for (String item : searchHistory) {
+        if (item != null && item.toLowerCase().startsWith(prefix.toLowerCase())) {
+            results.add(item);
         }
-
-        // Search course codes
-        for (String code : courseCache) {
-            if (code.startsWith(prefix)) {
-                results.add(code);
-            }
-        }
-
-        return results.toArray(new String[0]);
     }
+
+    // Search through inputHistory
+    for (String item : inputHistory) {
+        if (item != null && item.toLowerCase().startsWith(prefix.toLowerCase())) {
+            // Avoid adding same thing twice if it's in both caches
+            if (!results.contains(item)) {
+                results.add(item);
+            }
+        }
+    }
+
+    return results.toArray(new String[0]);
+}
 
     /**
      * Suggest course codes ONLY
      */
     public String[] suggestCourseCodes(String prefix, Course[] courses) {
-        ArrayList<String> results = new ArrayList<>();
+    ArrayList<String> results = new ArrayList<>();
 
-        for (int i = 0; i < courses.length; i++) {
-            if (courses[i] != null) {
-                String code = courses[i].getCode();
+    for (int i = 0; i < courses.length; i++) {
+        if (courses[i] != null) {
+            String code = courses[i].getCode();
 
-                // Add to cache
-                addCourseCode(code);
+            cacheService.cacheInputValue(code);
 
-                // Check prefix
-                if (code.startsWith(prefix)) {
-                    results.add(code);
-                }
+            if (code.toLowerCase().startsWith(prefix.toLowerCase())) {
+                results.add(code);
             }
         }
-
-        return results.toArray(new String[0]);
     }
+    return results.toArray(new String[0]);
+}
 
     /**
      * Suggest student IDs ONLY
@@ -103,12 +104,10 @@ public class SuggestionService {
             if (students[i] != null) {
                 String id = students[i].getID();
 
-                // Add to cache
-                addStudentID(id);
+                cacheService.cacheInputValue(id);
 
-                // Check prefix
-                if (id.startsWith(prefix)) {
-                    results.add(id);
+            if (code.toLowerCase().startsWith(prefix.toLowerCase())) {
+                results.add(id);
                 }
             }
         }

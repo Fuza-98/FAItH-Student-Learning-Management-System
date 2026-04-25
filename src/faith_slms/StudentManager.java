@@ -13,7 +13,7 @@ import java.util.*; // Import utilities (Scanner used)
  */
 public class StudentManager { // Define StudentManager class
     
-    private Student[] students = new Student[2]; // Array to store Student objects (size 2)
+    private Student[] students = new Student[100]; // Array to store Student objects (size 100)
     private int studentCount = 0; // Counter to track number of students
     
     //These 3 methods before the add function are helper methods for the RelationshiManager

@@ -20,9 +20,9 @@ public class FAiTH_SLMS { // Main class
         int choice = 0; // Variable to store user menu choice
         
         CacheService cacheService = new CacheService();
-        SuggestionService suggestionService = new SuggestionService();
+        SuggestionService suggestionService = new SuggestionService(cacheService);
         CourseManager courseManager = new CourseManager(cacheService);//Object to manage course 
-        StudentManager studManager = new StudentManager(cacheService);// Object to manage students
+        StudentManager studManager = new StudentManager();// Object to manage students
         RelationshipManager relManager = new RelationshipManager(studManager, courseManager, cacheService); //Object to manage Course - Student relationship
         
         System.out.println("\n===== FAITH SLMS ====="); // Display system title
@@ -47,6 +47,7 @@ public class FAiTH_SLMS { // Main class
             System.out.println("10. Assign Student to Course"); //Option 10
             System.out.println("11. List Courses of a Student"); //Option 11
             System.out.println("12. List Students in a Course"); //Option 12
+            System.out.println("13. Search Suggestions (using Cache)");
             System.out.println("-1. Exit"); // Exit option 
             
             System.out.print("Enter choice: "); // Prompt user
@@ -126,7 +127,7 @@ public class FAiTH_SLMS { // Main class
                     System.out.print("Enter prefix to search cache: ");
                     String prefix = input.nextLine();
                 
-                    String[] suggestions = suggestionService.suggestFromCache(prefix, cacheService);
+                    String[] suggestions = suggestionService.suggestFromCache(prefix);
                 
                     System.out.println("--- Suggestions from Cache ---");
                     if (suggestions.length == 0) {

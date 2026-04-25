@@ -62,7 +62,7 @@ public class CourseManager { // Define CourseManager class
         
         System.out.print("Enter credit hours: "); // Prompt user
         int creditHours = input.nextInt(); // Read credit hours
-        cache.cacheInputValue(creditHours);
+        cache.cacheInputValue(String.valueOf(creditHours));
         
         input.nextLine(); // Clear input buffer
         
@@ -118,7 +118,7 @@ public class CourseManager { // Define CourseManager class
                 System.out.print("Enter new credit hours: ");
                 int newCredits = input.nextInt(); // Read new credits
                 input.nextLine(); // Clear buffer
-                cache.cacheInputValue(newCredits);
+                cache.cacheInputValue(String.valueOf(newCredits));
                 courses[i].setCredits(newCredits); // Update credits
     
                 System.out.print("Enter new course summary: ");

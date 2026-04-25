@@ -14,11 +14,11 @@ public class RelationshipManager {
     private CacheService cache;
     private boolean[][] enrollment;
     
-    public RelationshipManager(StudentManager studManager, CourseManager courseManager){
-        this.studManager = studManager;
-        this.courseManager = courseManager;
-        this.cache = cache;
-        this.enrollment = new boolean[100][100];
+    public RelationshipManager(StudentManager studManager, CourseManager courseManager, CacheService cache){
+    this.studManager = studManager;
+    this.courseManager = courseManager;
+    this.cache = cache;
+    this.enrollment = new boolean[100][100];
     }
     
     public boolean assignStudentToCourse(String studentId, String courseCode) {

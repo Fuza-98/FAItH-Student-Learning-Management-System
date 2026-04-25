@@ -14,6 +14,8 @@ import java.util.*;
 public class SuggestionService {
     
     private CacheService cacheService;
+    private ArrayList<String> studentCache = new ArrayList<>();
+    private ArrayList<String> courseCache = new ArrayList<>();
 
     /**
      * Constructor
@@ -106,7 +108,7 @@ public class SuggestionService {
 
                 cacheService.cacheInputValue(id);
 
-            if (code.toLowerCase().startsWith(prefix.toLowerCase())) {
+           if (id.toLowerCase().startsWith(prefix.toLowerCase())) {
                 results.add(id);
                 }
             }
